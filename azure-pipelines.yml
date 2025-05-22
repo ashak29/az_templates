@@ -9,6 +9,7 @@ pr:
  branches:
    include:
      - az_templates
+     - main
    exclude:
      - az_templates
 
