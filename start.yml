@@ -1,5 +1,6 @@
+steps:
 - script: echo 'Running a demo app unit test'
-# displayName: 'Echo Message'
+  displayName: 'Echo Message'
 
 - task: UsePythonVersion@0
   inputs:
