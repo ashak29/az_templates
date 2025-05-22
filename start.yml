@@ -1,9 +1,9 @@
 - script: echo 'Running a demo app unit test'
-            # displayName: 'Echo Message'
+# displayName: 'Echo Message'
 
-  - task: UsePythonVersion@0
+- task: UsePythonVersion@0
   inputs:
     versionSpec: '3.x'
     addToPath: true
     architecture: 'x64'
-    displayName: 'Set Python Version'
+  displayName: 'Set Python Version'
