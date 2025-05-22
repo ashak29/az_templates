@@ -1,6 +1,6 @@
 # main
 trigger:
-- az_template
+- az_templates
 
 pool:
   vmImage: windows-latest
