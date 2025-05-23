@@ -1,15 +1,43 @@
 # main
 trigger:
-- main
+- az_templates
 
 pool:
   vmImage: windows-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+pr:
+ branches:
+   include:
+     - az_templates
+    #  - main
+   exclude:
+     - az_templates
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+
+
+stages:
+  - stage: 'UT'
+    displayName: 'Unit Test Stage'
+    jobs:
+      - job: 'unitTest'
+        displayName: 'Running Unit Tests'
+        steps:
+          - script: echo '@@@display the template'
+          - template: start.yml
+            
+  - stage: 'Build'
+    displayName: 'build the script'
+    jobs:
+      - job: 'buildscript'
+        displayName: 'building a script'
+        steps:
+          -  script: echo 'Running a demo app unit test'
+            # displayName: 'Echo Message'
+
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+              addToPath: true
+              architecture: 'x64'
+            displayName: 'Set Python Version'
+ 
