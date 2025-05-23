@@ -22,6 +22,7 @@ stages:
       - job: 'unitTest'
         displayName: 'Running Unit Tests'
         steps:
+          - script: echo '@@@display the template'
           - template: start.yml
             
   - stage: 'Build'
