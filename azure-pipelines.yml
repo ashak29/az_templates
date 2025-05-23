@@ -14,14 +14,14 @@ jobs:
         azureSubscription: 'Azure-DSE-APJ-BBL(17c6c273-d4ca-491d-bee5-d1b32f654eb3)'
         appType: 'functionAppLinux'
         appName: 'tf-fa'
-        package: 
+        package: '$(System.DefaultWorkingDirectory)/**/azfnapp1.zip'
         runtimeStack: 'PYTHON|3.10'
     - task: AzureFunctionApp@2
       inputs:
         connectedServiceNameARM: 'Azure-DSE-APJ-BBL(17c6c273-d4ca-491d-bee5-d1b32f654eb3)'
         appType: 'functionAppLinux'
         appName: 'opscenter-data'
-        # package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        package: '$(System.DefaultWorkingDirectory)/**/azfnapp2.zip'
         runtimeStack: 'PYTHON|3.10'
         deploymentMethod: 'auto'
 
