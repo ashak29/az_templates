@@ -9,6 +9,22 @@ jobs:
   - job: 'AzFunctionApp'
     displayName: 'connect to the az function app'
     steps:
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/azfnapp1.zip'
+        replaceExistingArchive: true
+      displayName: 'Zip function app code'
+
+    # Step 2: Publish the zip file as an artifact
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/azfnapp1.zip'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+      displayName: 'Publish artifact'
     - task: AzureFunctionApp@1
       inputs:
         azureSubscription: 'Azure-DSE-APJ-BBL(17c6c273-d4ca-491d-bee5-d1b32f654eb3)'
