@@ -1,15 +1,37 @@
 # main
 trigger:
-- main
-
+- test
 pool:
   vmImage: windows-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+jobs:
+  - job: 'AzFunctionApp'
+    displayName: 'connect to the az function app'
+    steps:
+    - task: AzureFunctionApp@1
+      inputs:
+        azureSubscription: 'Azure-DSE-APJ-BBL(17c6c273-d4ca-491d-bee5-d1b32f654eb3)'
+        appType: 'functionAppLinux'
+        appName: 'tf-fa'
+        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        runtimeStack: 'PYTHON|3.10'
+    - task: AzureFunctionApp@2
+      inputs:
+        connectedServiceNameARM: 'Azure-DSE-APJ-BBL(17c6c273-d4ca-491d-bee5-d1b32f654eb3)'
+        appType: 'functionAppLinux'
+        appName: 'opscenter-data'
+        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        runtimeStack: 'PYTHON|3.10'
+        deploymentMethod: 'auto'
+
+
+                    
+# steps:
+# - script: echo Hello, world!
+#   displayName: 'Run a one-line script'
+
+# - script: |
+#     echo Add other tasks to build, test, and deploy your project.
+#     echo See https://aka.ms/yaml
+#   displayName: 'Run a multi-line script'
