@@ -9,9 +9,11 @@ pr:
  branches:
    include:
      - az_templates
-     - main
+    #  - main
    exclude:
      - az_templates
+
+
 
 stages:
   - stage: 'UT'
@@ -20,7 +22,7 @@ stages:
       - job: 'unitTest'
         displayName: 'Running Unit Tests'
         steps:
-          - template: 'start.yml'
+          - template: start.yml
             
   - stage: 'Build'
     displayName: 'build the script'
